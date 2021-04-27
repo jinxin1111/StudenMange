@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 实体类的映射文件 主要用来写sql语句的 -->
+<mapper namespace="com.iflytek.dao.BookDao">
+    <!-- 和接口绑定 id名字要保持一致 -->
+    <!-- 登录的时候查询所有 -->
+    <select id="selectAllBook" resultType="Book" >
+
+         select * from BookList
+	</select>
+    <select id="selectAllBookPage" resultType="Book" parameterType="int">
+     select * from BookList limit #{pageString},#{a}
+
+	</select>
+    <!-- 模糊查询     -->
+    <select id="selectBook" resultType="Book" >
+        <!-- select * from BookList where bookname like  "%"#{bookname}"%"-->
+        select * from BookList where bookname like concat('%',#{bookname},'%')
+   </select>
+ <!--    <update id="BookMod"  >-->
+<!--&#45;&#45;         update BookList set bookname=#{book.bookname},typename=#{book.bookType},editor=#{book.editor} where id=#{book.id}-->
+<!--   update BookList set bookname='dad',typename='hhhc',editor='xjxiao' where id=1-->
+<!--	</update>-->
+<!--	private int id;
+	private String bookname;
+	private String typename;
+	private String editor;-->
+    <update id="BookMod">
+          update BookList set bookname=#{bookname},booktype=#{booktype},editor=#{editor} where id=#{id}
+ /*       update BookList set bookname='text',typename='hhhc',editor='xjxiao' where id=1*/
+    </update>
+
+    <insert id="AddBook">
+         insert into playerlist(id,bookname,booktype,editor)
+         value (#{id},#{bookname},#{booktype},#{editor})
+    </insert>
+
+    <delete id="DeleteBook" parameterType="int">
+        delete from BookList where id=#{id}
+    </delete>
+
+    <update id="BorrowBook">
+
+          update BookList set borrow=1 where id=#{id} and borrow!=1
+
+    </update>
+
+
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 把数据源，环境都交给spring去 在mybatis里面就不需要配置了 -->
+<configuration>
+    <!-- 别名 前面名字太长 给它起个名字方便 -->
+    <typeAliases>
+        <typeAlias type="com.iflytek.pojo.User" alias="User" />
+        <typeAlias type="com.iflytek.pojo.Book" alias="Book" />
+        <!-- 也可以批量定义别名 扫描整个包下面的类 别名为类名 -->
+        <!-- <package name="包名"/> -->
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="map/UserDaoMapper.xml" />
+        <mapper resource="map/BookDaoMapper.xml" />
+    </mappers>
+
+</configuration>

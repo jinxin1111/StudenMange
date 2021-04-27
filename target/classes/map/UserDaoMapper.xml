@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 实体类的映射文件 主要用来写sql语句的 -->
+<mapper namespace="com.iflytek.dao.UserDao">
+	<!-- 和接口绑定 id名字要保持一致 -->
+	<!-- 登录的时候查询所有 -->
+	<select id="login" resultType="User" >
+		select * from
+		users where username =#{username} and password =#{password}
+	</select>
+	
+	
+	<!-- 注册添加用户 -->
+	<insert id="register" parameterType="User">
+		insert into
+		users(username,password)value(#{username},#{password})
+	</insert>
+	
+	
+	<!-- 检查用户名重复的问题 -->
+	<select id="CheckSameUser" resultType="User">
+	select * from users where username = #{username}
+	</select>
+	
+	
+</mapper>
